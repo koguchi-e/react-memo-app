@@ -10,9 +10,9 @@ function App() {
     { id: 1, text: "メモ1\nメモ1の内容" },
     { id: 2, text: "メモ2\nメモ2の内容" },
   ]);
-  // const [input, setInput] = useState("");
   const [isEditing, setIsEditing] = useState(false);
-  const [editMemo, setEditMemo] = useState(memo.text);
+  const [editingId, setEditingId] = useState(null);
+  const [editMemo, setEditMemo] = useState("");
 
   const addMemos = () => {
     setMemos([
@@ -25,18 +25,19 @@ function App() {
     ]);
   };
 
-  const handleEditing = () => {
+  const handleEditing = (memo) => {
     setIsEditing(true);
+    setEditingId(memo.id);
+    setEditMemo(memo.text);
   };
 
   const updateMemo = () => {
-    setMemos([
-      ...memos,
-      {
-        id: Date.now(),
-        text: "新規メモ",
-      },
-    ]);
+    setMemos(
+      memos.map((memo) =>
+        memo.id === editingId ? { ...memo, text: editMemo } : memo
+      )
+    );
+    setIsEditing(false);
   };
 
   return (
@@ -45,7 +46,10 @@ function App() {
         <ul className="memos-list">
           {memos.map((memo) => (
             <li key={memo.id}>
-              <button className="button-reset" onClick={handleEditing}>
+              <button
+                className="button-reset"
+                onClick={() => handleEditing(memo)}
+              >
                 {memo.text.split("\n")[0]}
               </button>
             </li>
@@ -58,8 +62,12 @@ function App() {
       <Container label="更新">
         {isEditing === true ? (
           <>
-            <TextAreaField id={memo.id} value={editMemo}>
-              {memo}
+            <TextAreaField
+              id={editingId}
+              value={editMemo}
+              onChange={(e) => setEditMemo(e.target.value)}
+            >
+              {memo.text}
             </TextAreaField>
             <button type="submit" className="button" onClick={updateMemo}>
               更新
