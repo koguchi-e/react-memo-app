@@ -11,9 +11,25 @@
 
 .label {
   color: darkgray;
+  display: flex;
+  justify-content: flex-start;
+  margin-bottom: 0.5em;
 }
 
 .textarea-form {
   border-radius: 3px;
   border: 2px solid #ddd;
+  display: flex;
+  justify-content: flex-start;
+}
+
+.button {
+  background-color: #d1d1d1;
+  color: black;
+  font-size: 20px;
+  border-radius: 3px;
+  border: 2px solid black;
+  margin-top: 1em;
+  display: flex;
+  justify-content: flex-start;
 }
