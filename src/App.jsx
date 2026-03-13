@@ -1,8 +1,8 @@
 import { useState } from "react";
 
 import { TextAreaField } from "./components/TextAreaField";
-
 import "./App.css";
+import { memo } from "react";
 
 function App() {
   const [memos, setMemos] = useState([
