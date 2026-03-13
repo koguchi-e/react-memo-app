@@ -1,10 +1,21 @@
-export function Container({ label, id, children }) {
+export function Container({ isEditing, children }) {
+  let labelName;
+  if (isEditing === true) {
+    labelName = "編集";
+  } else {
+    labelName = "一覧";
+  }
+
   return (
     <>
-      <label htmlFor={id} className="label">
-        <b>{label}</b>
-      </label>
-      <div className="container">{children}</div>
+      <table className="container">
+        <tr>
+          <td>
+            <label className="label">{labelName}</label>
+            {children}
+          </td>
+        </tr>
+      </table>
     </>
   );
 }

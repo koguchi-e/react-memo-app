@@ -1,6 +1,5 @@
 import { useState } from "react";
 
-import { Container } from "./components/Container";
 import { TextAreaField } from "./components/TextAreaField";
 import "./App.css";
 import { memo } from "react";
@@ -40,43 +39,53 @@ function App() {
     setIsEditing(false);
   };
 
+  let labelName;
+  if (isEditing === true) {
+    labelName = "編集";
+  } else {
+    labelName = "一覧";
+  }
+
   return (
     <>
-      <Container label="一覧">
-        <ul className="memos-list">
-          {memos.map((memo) => (
-            <li key={memo.id}>
-              <button
-                className="button-reset"
-                onClick={() => handleEditing(memo)}
-              >
-                {memo.text.split("\n")[0]}
-              </button>
-            </li>
-          ))}
-        </ul>
-        <button className="button-reset" onClick={addMemos}>
-          ＋
-        </button>
-      </Container>
-      <Container label="更新">
-        {isEditing === true ? (
-          <>
-            <TextAreaField
-              id={editingId}
-              value={editMemo}
-              onChange={(e) => setEditMemo(e.target.value)}
-            >
-              {memo.text}
-            </TextAreaField>
-            <button type="submit" className="button" onClick={updateMemo}>
-              更新
+      <table className="container">
+        <tr>
+          <td>
+            <label className="label">{labelName}</label>
+            <ul className="memos-list">
+              {memos.map((memo) => (
+                <li key={memo.id}>
+                  <button
+                    className="button-reset"
+                    onClick={() => handleEditing(memo)}
+                  >
+                    {memo.text.split("\n")[0]}
+                  </button>
+                </li>
+              ))}
+            </ul>
+            <button className="button-reset" onClick={addMemos}>
+              ＋
             </button>
-          </>
-        ) : (
-          <p>ここに更新</p>
-        )}
-      </Container>
+          </td>
+          <td>
+            {isEditing === true && (
+              <>
+                <TextAreaField
+                  id={editingId}
+                  value={editMemo}
+                  onChange={(e) => setEditMemo(e.target.value)}
+                >
+                  {memo.text}
+                </TextAreaField>
+                <button type="submit" className="button" onClick={updateMemo}>
+                  更新
+                </button>
+              </>
+            )}
+          </td>
+        </tr>
+      </table>
     </>
   );
 }
