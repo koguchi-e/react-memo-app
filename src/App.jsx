@@ -15,22 +15,25 @@ function App() {
       ...memos,
       {
         id: Date.now(),
-        text: input,
+        text: "新規メモ",
       },
     ]);
     setInput("");
   };
 
   return (
-    <div className="app-background">
+    <>
       <Container label="一覧">
         <ul className="memos-list">
           {memos.map((memo) => (
             <li key={memo.id}>{memo.text}</li>
           ))}
         </ul>
+        <button className="button-reset" onClick={addMemos}>
+          ＋
+        </button>
       </Container>
-      <Container label="新規作成">
+      {/* <Container label="新規作成">
         <textarea
           id="memo-input"
           value={input}
@@ -41,8 +44,8 @@ function App() {
         <button type="submit" className="button" onClick={addMemos}>
           更新
         </button>
-      </Container>
-    </div>
+      </Container> */}
+    </>
   );
 }
 
