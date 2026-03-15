@@ -44,6 +44,10 @@ function App() {
     labelName = "一覧";
   }
 
+  const deleteMemo = (id) => {
+    setMemos(memos.filter((memo) => memo.id !== id));
+  };
+
   return (
     <>
       <table className="container">
@@ -78,6 +82,13 @@ function App() {
                 </TextAreaField>
                 <button type="submit" className="button" onClick={updateMemo}>
                   更新
+                </button>
+                <button
+                  type="button"
+                  className="button"
+                  onClick={() => deleteMemo(editingId)}
+                >
+                  削除
                 </button>
               </>
             )}
