@@ -1,5 +1,6 @@
-import { useState, memo, useEffect } from "react";
-import { TextAreaField } from "./components/TextAreaField";
+import { useState, useEffect } from "react";
+import { MemoList } from "./components/MemoList";
+import { MemoEditor } from "./components/MemoEditor";
 import "./App.css";
 
 function App() {
@@ -65,46 +66,25 @@ function App() {
         <tr>
           <td>
             <label className="label">{labelName}</label>
-            <ul className="memos-list">
-              {memos.map((memo) => (
-                <li key={memo.id}>
-                  {editingId === memo.id ? (
-                    memo.text.split("\n")[0]
-                  ) : (
-                    <button
-                      className="button-reset"
-                      onClick={() => handleEditing(memo)}
-                    >
-                      {memo.text.split("\n")[0]}
-                    </button>
-                  )}
-                </li>
-              ))}
-            </ul>
+            <MemoList
+              memos={memos}
+              editingId={editingId}
+              handleEditing={handleEditing}
+            ></MemoList>
             <button className="button-reset" onClick={addMemos}>
               ＋
             </button>
           </td>
           <td>
-            {isEditing === true && (
+            {isEditing && (
               <>
-                <TextAreaField
-                  id={editingId}
-                  value={editMemo}
-                  onChange={(e) => setEditMemo(e.target.value)}
-                >
-                  {memo.text}
-                </TextAreaField>
-                <button type="submit" className="button" onClick={updateMemo}>
-                  更新
-                </button>
-                <button
-                  type="button"
-                  className="button"
-                  onClick={() => deleteMemo(editingId)}
-                >
-                  削除
-                </button>
+                <MemoEditor
+                  editingId={editingId}
+                  editMemo={editMemo}
+                  setEditMemo={setEditMemo}
+                  updateMemo={updateMemo}
+                  deleteMemo={deleteMemo}
+                ></MemoEditor>
               </>
             )}
           </td>
