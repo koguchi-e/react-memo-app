@@ -1,4 +1,5 @@
 import { TextAreaField } from "../Form/TextAreaField";
+import { SubmitButton } from "../Form/SubmitButton";
 export function MemoEditor({
   editingId,
   editMemo,
@@ -13,16 +14,16 @@ export function MemoEditor({
         value={editMemo}
         onChange={(e) => setEditMemo(e.target.value)}
       ></TextAreaField>
-      <button type="submit" className="button" onClick={updateMemo}>
-        更新
-      </button>
-      <button
+      <SubmitButton
+        type="submit"
+        onClick={updateMemo}
+        label="更新"
+      ></SubmitButton>
+      <SubmitButton
         type="button"
-        className="button"
         onClick={() => deleteMemo(editingId)}
-      >
-        削除
-      </button>
+        label="削除"
+      ></SubmitButton>
     </>
   );
 }
