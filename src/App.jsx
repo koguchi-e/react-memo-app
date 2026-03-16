@@ -1,12 +1,18 @@
-import { useState, memo } from "react";
+import { useState, memo, useEffect } from "react";
 import { TextAreaField } from "./components/TextAreaField";
 import "./App.css";
 
 function App() {
-  const [memos, setMemos] = useState([
-    { id: 1, text: "メモ1\nメモ1の内容" },
-    { id: 2, text: "メモ2\nメモ2の内容" },
-  ]);
+  const [memos, setMemos] = useState(() => {
+    const data = localStorage.getItem("memos");
+    if (data) {
+      return JSON.parse(data);
+    }
+    return [
+      { id: 1, text: "メモ1\nメモ1の内容" },
+      { id: 2, text: "メモ2\nメモ2の内容" },
+    ];
+  });
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editMemo, setEditMemo] = useState("");
@@ -49,6 +55,10 @@ function App() {
     setIsEditing(false);
   };
 
+  useEffect(() => {
+    localStorage.setItem("memos", JSON.stringify(memos));
+  }, [memos]);
+
   return (
     <>
       <table className="container">
@@ -58,12 +68,16 @@ function App() {
             <ul className="memos-list">
               {memos.map((memo) => (
                 <li key={memo.id}>
-                  <button
-                    className="button-reset"
-                    onClick={() => handleEditing(memo)}
-                  >
-                    {memo.text.split("\n")[0]}
-                  </button>
+                  {editingId === memo.id ? (
+                    memo.text.split("\n")[0]
+                  ) : (
+                    <button
+                      className="button-reset"
+                      onClick={() => handleEditing(memo)}
+                    >
+                      {memo.text.split("\n")[0]}
+                    </button>
+                  )}
                 </li>
               ))}
             </ul>
