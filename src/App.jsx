@@ -38,8 +38,8 @@ function App() {
   const updateMemo = () => {
     setMemos(
       memos.map((memo) =>
-        memo.id === editingId ? { ...memo, text: editingText } : memo
-      )
+        memo.id === editingId ? { ...memo, text: editingText } : memo,
+      ),
     );
     setIsEditing(false);
   };
