@@ -22,7 +22,7 @@ function App() {
     setMemos([
       ...memos,
       {
-        id: Date.now(),
+        id: Math.random(),
         text: "新規メモ",
         editing: false,
       },
