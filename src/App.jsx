@@ -46,6 +46,7 @@ function App() {
 
   const deleteMemo = (id) => {
     setMemos(memos.filter((memo) => memo.id !== id));
+    setIsEditing(false);
   };
 
   return (
