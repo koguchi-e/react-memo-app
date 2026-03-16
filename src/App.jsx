@@ -63,32 +63,34 @@ function App() {
   return (
     <>
       <table className="container">
-        <tr>
-          <td>
-            <label className="label">{labelName}</label>
-            <MemoList
-              memos={memos}
-              editingId={editingId}
-              handleEditing={handleEditing}
-            ></MemoList>
-            <button className="button-reset" onClick={addMemo}>
-              ＋
-            </button>
-          </td>
-          <td>
-            {isEditing && (
-              <>
-                <MemoEditor
-                  editingId={editingId}
-                  editingText={editingText}
-                  setEditingText={setEditingText}
-                  updateMemo={updateMemo}
-                  deleteMemo={deleteMemo}
-                ></MemoEditor>
-              </>
-            )}
-          </td>
-        </tr>
+        <tbody>
+          <tr>
+            <td>
+              <label className="label">{labelName}</label>
+              <MemoList
+                memos={memos}
+                editingId={editingId}
+                handleEditing={handleEditing}
+              ></MemoList>
+              <button className="button-reset" onClick={addMemo}>
+                ＋
+              </button>
+            </td>
+            <td>
+              {isEditing && (
+                <>
+                  <MemoEditor
+                    editingId={editingId}
+                    editingText={editingText}
+                    setEditingText={setEditingText}
+                    updateMemo={updateMemo}
+                    deleteMemo={deleteMemo}
+                  ></MemoEditor>
+                </>
+              )}
+            </td>
+          </tr>
+        </tbody>
       </table>
     </>
   );
