@@ -1,5 +1,5 @@
-import { TextAreaField } from "../Form/TextAreaField";
-import { SubmitButton } from "../Form/SubmitButton";
+import { TextAreaField } from "./form/TextAreaField";
+import { SubmitButton } from "./form/SubmitButton";
 
 export function MemoEditor({
   editingId,
