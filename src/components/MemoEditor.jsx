@@ -2,8 +2,8 @@ import { TextAreaField } from "../Form/TextAreaField";
 import { SubmitButton } from "../Form/SubmitButton";
 export function MemoEditor({
   editingId,
-  editMemo,
-  setEditMemo,
+  editingText,
+  setEditingText,
   updateMemo,
   deleteMemo,
 }) {
@@ -11,8 +11,8 @@ export function MemoEditor({
     <>
       <TextAreaField
         id={editingId}
-        value={editMemo}
-        onChange={(e) => setEditMemo(e.target.value)}
+        value={editingText}
+        onChange={(e) => setEditingText(e.target.value)}
       ></TextAreaField>
       <SubmitButton
         type="submit"

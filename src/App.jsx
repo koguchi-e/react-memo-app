@@ -16,9 +16,9 @@ function App() {
   });
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
-  const [editMemo, setEditMemo] = useState("");
+  const [editingText, setEditingText] = useState("");
 
-  const addMemos = () => {
+  const addMemo = () => {
     setMemos([
       ...memos,
       {
@@ -32,13 +32,13 @@ function App() {
   const handleEditing = (memo) => {
     setIsEditing(true);
     setEditingId(memo.id);
-    setEditMemo(memo.text);
+    setEditingText(memo.text);
   };
 
   const updateMemo = () => {
     setMemos(
       memos.map((memo) =>
-        memo.id === editingId ? { ...memo, text: editMemo } : memo
+        memo.id === editingId ? { ...memo, text: editingText } : memo
       )
     );
     setIsEditing(false);
@@ -71,7 +71,7 @@ function App() {
               editingId={editingId}
               handleEditing={handleEditing}
             ></MemoList>
-            <button className="button-reset" onClick={addMemos}>
+            <button className="button-reset" onClick={addMemo}>
               ＋
             </button>
           </td>
@@ -80,8 +80,8 @@ function App() {
               <>
                 <MemoEditor
                   editingId={editingId}
-                  editMemo={editMemo}
-                  setEditMemo={setEditMemo}
+                  editingText={editingText}
+                  setEditingText={setEditingText}
                   updateMemo={updateMemo}
                   deleteMemo={deleteMemo}
                 ></MemoEditor>
