@@ -1,7 +1,13 @@
-export function MemoItem({ memo, editingId, handleEditing }) {
+import { memo } from "react";
+
+export const MemoItem = memo(function MemoItem({
+  memo,
+  editingId,
+  handleEditing,
+}) {
   return (
     <>
-      <li key={memo.id}>
+      <li>
         {editingId === memo.id ? (
           memo.text.split("\n")[0]
         ) : (
@@ -12,4 +18,4 @@ export function MemoItem({ memo, editingId, handleEditing }) {
       </li>
     </>
   );
-}
+});
