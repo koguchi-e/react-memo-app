@@ -5,14 +5,18 @@ export const MemoItem = memo(function MemoItem({
   editingId,
   handleEditing,
 }) {
+  let firstLine = "";
+  if (memo && memo.text) {
+    firstLine = memo.text.split("\n")[0];
+  }
   return (
     <>
       <li>
         {editingId === memo.id ? (
-          memo.text.split("\n")[0]
+          firstLine
         ) : (
           <button className="button-reset" onClick={() => handleEditing(memo)}>
-            {memo.text.split("\n")[0]}
+            {firstLine}
           </button>
         )}
       </li>
