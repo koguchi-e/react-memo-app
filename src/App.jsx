@@ -1,7 +1,9 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, createContext } from "react";
 import { MemoList } from "./components/MemoList";
 import { MemoEditor } from "./components/MemoEditor";
 import "./App.css";
+
+export const LoginContext = createContext();
 
 function App() {
   const [memos, setMemos] = useState(() => {
@@ -17,6 +19,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
+  const [isLogin, setIsLogin] = useState(false);
 
   const addMemo = () => {
     setMemos([
@@ -38,8 +41,8 @@ function App() {
   const updateMemo = () => {
     setMemos(
       memos.map((memo) =>
-        memo.id === editingId ? { ...memo, text: editingText } : memo,
-      ),
+        memo.id === editingId ? { ...memo, text: editingText } : memo
+      )
     );
     setIsEditing(false);
   };
@@ -72,9 +75,11 @@ function App() {
                 editingId={editingId}
                 handleEditing={handleEditing}
               ></MemoList>
-              <button className="button-reset" onClick={addMemo}>
-                ＋
-              </button>
+              <LoginContext.Provider value={{ isLogin, setIsLogin }}>
+                <button className="button-reset" onClick={addMemo}>
+                  ＋
+                </button>
+              </LoginContext.Provider>
             </td>
             <td>
               {isEditing && (
