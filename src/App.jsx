@@ -76,7 +76,7 @@ function App() {
                 handleEditing={handleEditing}
               ></MemoList>
               <LoginContext.Provider value={{ isLogin, setIsLogin }}>
-                <button className="button-reset" onClick={addMemo}>
+                <button className="link-button" onClick={addMemo}>
                   ＋
                 </button>
               </LoginContext.Provider>
