@@ -10,16 +10,14 @@ export const MemoItem = memo(function MemoItem({
     firstLine = memo.text.split("\n")[0];
   }
   return (
-    <>
-      <li>
-        {editingId === memo.id ? (
-          firstLine
-        ) : (
-          <button className="button-reset" onClick={() => handleEditing(memo)}>
-            {firstLine}
-          </button>
-        )}
-      </li>
-    </>
+    <li>
+      {editingId === memo.id ? (
+        firstLine
+      ) : (
+        <button className="button-reset" onClick={() => handleEditing(memo)}>
+          {firstLine}
+        </button>
+      )}
+    </li>
   );
 });
