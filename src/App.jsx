@@ -1,121 +1,99 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
-import heroImg from './assets/hero.png'
-import './App.css'
+import { useState, useEffect } from "react";
+import { MemoList } from "./components/MemoList";
+import { MemoEditor } from "./components/MemoEditor";
+import "./App.css";
 
 function App() {
-  const [count, setCount] = useState(0)
+  const [memos, setMemos] = useState(() => {
+    const data = localStorage.getItem("memos");
+    if (data) {
+      return JSON.parse(data);
+    }
+    return [
+      { id: 1, text: "メモ1\nメモ1の内容" },
+      { id: 2, text: "メモ2\nメモ2の内容" },
+    ];
+  });
+  const [isEditing, setIsEditing] = useState(false);
+  const [editingId, setEditingId] = useState(null);
+  const [editingText, setEditingText] = useState("");
+
+  const addMemo = () => {
+    setMemos([
+      ...memos,
+      {
+        id: Math.random(),
+        text: "新規メモ",
+        editing: false,
+      },
+    ]);
+  };
+
+  const handleEditing = (memo) => {
+    setIsEditing(true);
+    setEditingId(memo.id);
+    setEditingText(memo.text);
+  };
+
+  const updateMemo = () => {
+    setMemos(
+      memos.map((memo) =>
+        memo.id === editingId ? { ...memo, text: editingText } : memo,
+      ),
+    );
+    setIsEditing(false);
+  };
+
+  let labelName;
+  if (isEditing === true) {
+    labelName = "編集";
+  } else {
+    labelName = "一覧";
+  }
+
+  const deleteMemo = (id) => {
+    setMemos(memos.filter((memo) => memo.id !== id));
+    setIsEditing(false);
+  };
+
+  useEffect(() => {
+    localStorage.setItem("memos", JSON.stringify(memos));
+  }, [memos]);
 
   return (
     <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
-
-      <div className="ticks"></div>
-
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
-
-      <div className="ticks"></div>
-      <section id="spacer"></section>
+      <table className="container">
+        <tbody>
+          <tr>
+            <td>
+              <label className="label">{labelName}</label>
+              <MemoList
+                memos={memos}
+                editingId={editingId}
+                handleEditing={handleEditing}
+              ></MemoList>
+              <button className="button-reset" onClick={addMemo}>
+                ＋
+              </button>
+            </td>
+            <td>
+              {isEditing && (
+                <>
+                  <MemoEditor
+                    editingId={editingId}
+                    editingText={editingText}
+                    setEditingText={setEditingText}
+                    updateMemo={updateMemo}
+                    deleteMemo={deleteMemo}
+                  ></MemoEditor>
+                </>
+              )}
+            </td>
+          </tr>
+        </tbody>
+      </table>
     </>
-  )
+  );
 }
 
-export default App
+export default App;
