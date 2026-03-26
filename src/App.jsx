@@ -1,10 +1,9 @@
-import { useState, useEffect, createContext } from "react";
+import { useState, useEffect } from "react";
 import { Header } from "./components/layout/Header";
 import { MainArea } from "./components/layout/MainArea";
-
+import { LoginContext } from "./contexts/LoginContext";
+import { useLogin } from "./hooks/useLogin";
 import "./App.css";
-
-export const LoginContext = createContext();
 
 function App() {
   const [memos, setMemos] = useState(() => {
@@ -20,7 +19,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const { isLoggedIn, setIsLoggedIn } = useLogin();
 
   const addMemo = () => {
     setMemos([
