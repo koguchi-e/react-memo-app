@@ -49,7 +49,11 @@ function App() {
 
   let labelName;
   if (isEditing === true) {
-    labelName = "編集";
+    if (isLoggedIn === true) {
+      labelName = "編集";
+    } else {
+      labelName = "詳細";
+    }
   } else {
     labelName = "一覧";
   }
