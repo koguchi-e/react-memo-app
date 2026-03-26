@@ -1,6 +1,7 @@
 body {
   background: #eeeeee;
   margin: 0;
+  color: black;
 }
 
 #root {
@@ -58,10 +59,11 @@ label {
   font: inherit;
   cursor: pointer;
   text-decoration: underline;
+  color: #0099ff;
 }
 
 .primary-button:hover {
-  color: #d1d1d1;
+  color: #c8e9ff;
   text-decoration: underline;
 }
 
