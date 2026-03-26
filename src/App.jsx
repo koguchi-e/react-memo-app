@@ -77,53 +77,56 @@ function App() {
       <table className="container">
         <tbody>
           <tr>
-            <td>
-              <label className="label">{labelName}</label>
-              <MemoList
-                memos={memos}
-                editingId={editingId}
-                handleEditing={handleEditing}
-              ></MemoList>
-              <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-                <button className="link-button" onClick={addMemo}>
-                  ＋
-                </button>
-              </LoginContext.Provider>
-            </td>
-            <td>
-              {isLoggedIn ? (
-                <>
-                  <SubmitButton
-                    type="button"
-                    className="button loggin-btn"
-                    onClick={handleLogout}
-                    label="ログアウト"
-                  ></SubmitButton>
-                </>
-              ) : (
-                <>
-                  <SubmitButton
-                    type="button"
-                    className="button loggin-btn"
-                    onClick={handleLogin}
-                    label="ログイン"
-                  ></SubmitButton>
-                </>
-              )}
+            <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+              <td>
+                <label className="label">{labelName}</label>
+                <MemoList
+                  memos={memos}
+                  editingId={editingId}
+                  handleEditing={handleEditing}
+                ></MemoList>
+                {isLoggedIn && (
+                  <>
+                    <button className="link-button" onClick={addMemo}>
+                      ＋
+                    </button>
+                  </>
+                )}
+              </td>
+              <td>
+                {isLoggedIn ? (
+                  <>
+                    <SubmitButton
+                      type="button"
+                      className="button loggin-btn"
+                      onClick={handleLogout}
+                      label="ログアウト"
+                    ></SubmitButton>
+                  </>
+                ) : (
+                  <>
+                    <SubmitButton
+                      type="button"
+                      className="button loggin-btn"
+                      onClick={handleLogin}
+                      label="ログイン"
+                    ></SubmitButton>
+                  </>
+                )}
 
-              {isEditing && (
-                <>
-                  <MemoEditor
-                    editingId={editingId}
-                    editingText={editingText}
-                    setEditingText={setEditingText}
-                    updateMemo={updateMemo}
-                    deleteMemo={deleteMemo}
-                    isLoggedIn={isLoggedIn}
-                  ></MemoEditor>
-                </>
-              )}
-            </td>
+                {isEditing && (
+                  <>
+                    <MemoEditor
+                      editingId={editingId}
+                      editingText={editingText}
+                      setEditingText={setEditingText}
+                      updateMemo={updateMemo}
+                      deleteMemo={deleteMemo}
+                    ></MemoEditor>
+                  </>
+                )}
+              </td>
+            </LoginContext.Provider>
           </tr>
         </tbody>
       </table>
