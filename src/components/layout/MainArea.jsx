@@ -1,7 +1,7 @@
 import { useContext } from "react";
 
-import { MemoList } from "../MemoList";
-import { MemoEditor } from "../MemoEditor";
+import { MemoList } from "../memo/MemoList";
+import { MemoEditor } from "../memo/MemoEditor";
 import { LoginContext } from "../../contexts/LoginContext";
 
 export function MainArea({

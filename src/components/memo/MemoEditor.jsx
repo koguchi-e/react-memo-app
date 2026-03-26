@@ -1,8 +1,8 @@
 import { useContext } from "react";
 
-import { TextAreaField } from "./form/TextAreaField";
-import { SubmitButton } from "./form/SubmitButton";
-import { LoginContext } from "../contexts/LoginContext";
+import { TextAreaField } from "../form/TextAreaField";
+import { SubmitButton } from "../form/SubmitButton";
+import { LoginContext } from "../../contexts/LoginContext";
 
 export function MemoEditor({
   editingId,
