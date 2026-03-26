@@ -87,7 +87,7 @@ function App() {
                 ></MemoList>
                 {isLoggedIn && (
                   <>
-                    <button className="link-button" onClick={addMemo}>
+                    <button className="primary-button" onClick={addMemo}>
                       ＋
                     </button>
                   </>

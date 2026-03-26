@@ -14,7 +14,7 @@ export const MemoItem = memo(function MemoItem({
       {editingId === memo.id ? (
         firstLine
       ) : (
-        <button className="link-button" onClick={() => handleEditing(memo)}>
+        <button className="primary-button" onClick={() => handleEditing(memo)}>
           {firstLine}
         </button>
       )}
