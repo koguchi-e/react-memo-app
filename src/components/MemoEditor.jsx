@@ -29,7 +29,7 @@ export function MemoEditor({
           ></SubmitButton>
           <SubmitButton
             type="button"
-            className="button"
+            className="button delete-button"
             onClick={() => deleteMemo(editingId)}
             label="削除"
           ></SubmitButton>

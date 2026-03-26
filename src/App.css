@@ -32,8 +32,8 @@ label {
   border: 2px solid #ddd;
   display: flex;
   justify-content: flex-start;
-  width: 200px;
-  height: 150px;
+  width: 240px;
+  height: 200px;
 }
 
 .button {
@@ -111,5 +111,9 @@ ul {
 }
 
 .update-button {
-  flex-grow: 2;
+  flex-grow: 3;
+}
+
+.delete-button {
+  flex-grow: 1;
 }
