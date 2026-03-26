@@ -1,6 +1,7 @@
 import { useState, useEffect, createContext } from "react";
 import { MemoList } from "./components/MemoList";
 import { MemoEditor } from "./components/MemoEditor";
+import { SubmitButton } from "./components/form/SubmitButton";
 import "./App.css";
 
 export const LoginContext = createContext();
@@ -19,7 +20,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
-  const [isLogin, setIsLogin] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const addMemo = () => {
     setMemos([
@@ -41,8 +42,8 @@ function App() {
   const updateMemo = () => {
     setMemos(
       memos.map((memo) =>
-        memo.id === editingId ? { ...memo, text: editingText } : memo
-      )
+        memo.id === editingId ? { ...memo, text: editingText } : memo,
+      ),
     );
     setIsEditing(false);
   };
@@ -63,6 +64,14 @@ function App() {
     localStorage.setItem("memos", JSON.stringify(memos));
   }, [memos]);
 
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
+
+  const handleLogout = () => {
+    setIsLoggedIn(false);
+  };
+
   return (
     <>
       <table className="container">
@@ -75,13 +84,33 @@ function App() {
                 editingId={editingId}
                 handleEditing={handleEditing}
               ></MemoList>
-              <LoginContext.Provider value={{ isLogin, setIsLogin }}>
+              <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
                 <button className="link-button" onClick={addMemo}>
                   ＋
                 </button>
               </LoginContext.Provider>
             </td>
             <td>
+              {isLoggedIn ? (
+                <>
+                  <SubmitButton
+                    type="button"
+                    className="button loggin-btn"
+                    onClick={handleLogout}
+                    label="ログアウト"
+                  ></SubmitButton>
+                </>
+              ) : (
+                <>
+                  <SubmitButton
+                    type="button"
+                    className="button loggin-btn"
+                    onClick={handleLogin}
+                    label="ログイン"
+                  ></SubmitButton>
+                </>
+              )}
+
               {isEditing && (
                 <>
                   <MemoEditor
@@ -90,6 +119,7 @@ function App() {
                     setEditingText={setEditingText}
                     updateMemo={updateMemo}
                     deleteMemo={deleteMemo}
+                    isLoggedIn={isLoggedIn}
                   ></MemoEditor>
                 </>
               )}
