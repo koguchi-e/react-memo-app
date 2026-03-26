@@ -1,7 +1,7 @@
 import { useState, useEffect, createContext } from "react";
-import { MemoList } from "./components/MemoList";
-import { MemoEditor } from "./components/MemoEditor";
-import { SubmitButton } from "./components/form/SubmitButton";
+import { Header } from "./components/layout/Header";
+import { MainArea } from "./components/layout/MainArea";
+
 import "./App.css";
 
 export const LoginContext = createContext();
@@ -64,78 +64,30 @@ function App() {
     localStorage.setItem("memos", JSON.stringify(memos));
   }, [memos]);
 
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
-
-  const handleLogout = () => {
-    setIsLoggedIn(false);
-  };
-
   return (
     <>
-      <table className="container">
-        <tbody>
-          <tr>
-            <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+        <table className="container">
+          <tbody>
+            <tr>
               <td>
-                <div className="header">
-                  <label className="label">{labelName}</label>
-
-                  <div className="login-area">
-                    {isLoggedIn ? (
-                      <SubmitButton
-                        type="button"
-                        className="button loggin-btn"
-                        onClick={handleLogout}
-                        label="ログアウト"
-                      />
-                    ) : (
-                      <SubmitButton
-                        type="button"
-                        className="button loggin-btn"
-                        onClick={handleLogin}
-                        label="ログイン"
-                      />
-                    )}
-                  </div>
-                </div>
-
-                <div className="main-area">
-                  <div className="list-area">
-                    <MemoList
-                      memos={memos}
-                      editingId={editingId}
-                      handleEditing={handleEditing}
-                    ></MemoList>
-
-                    <div className="create-button-area">
-                      {isLoggedIn && (
-                        <>
-                          <button className="primary-button" onClick={addMemo}>
-                            ＋
-                          </button>
-                        </>
-                      )}
-                    </div>
-                  </div>
-                  <div className="memo-area">
-                    {isEditing && (
-                      <MemoEditor
-                        editingId={editingId}
-                        editingText={editingText}
-                        setEditingText={setEditingText}
-                        updateMemo={updateMemo}
-                        deleteMemo={deleteMemo}
-                      />
-                    )}
-                  </div>
-                </div>
+                <Header labelName={labelName}></Header>
+                <MainArea
+                  memos={memos}
+                  editingId={editingId}
+                  handleEditing={handleEditing}
+                  onClick={addMemo}
+                  isEditing={isEditing}
+                  editingText={editingText}
+                  setEditingText={setEditingText}
+                  updateMemo={updateMemo}
+                  deleteMemo={deleteMemo}
+                ></MainArea>
               </td>
-            </LoginContext.Provider>
-          </tr>
-        </tbody>
-      </table>
+            </tr>
+          </tbody>
+        </table>
+      </LoginContext.Provider>
     </>
   );
 }
