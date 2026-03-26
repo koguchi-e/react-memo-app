@@ -79,52 +79,58 @@ function App() {
           <tr>
             <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
               <td>
-                <label className="label">{labelName}</label>
-                <MemoList
-                  memos={memos}
-                  editingId={editingId}
-                  handleEditing={handleEditing}
-                ></MemoList>
-                {isLoggedIn && (
-                  <>
-                    <button className="primary-button" onClick={addMemo}>
-                      ＋
-                    </button>
-                  </>
-                )}
-              </td>
-              <td>
-                {isLoggedIn ? (
-                  <>
-                    <SubmitButton
-                      type="button"
-                      className="button loggin-btn"
-                      onClick={handleLogout}
-                      label="ログアウト"
-                    ></SubmitButton>
-                  </>
-                ) : (
-                  <>
-                    <SubmitButton
-                      type="button"
-                      className="button loggin-btn"
-                      onClick={handleLogin}
-                      label="ログイン"
-                    ></SubmitButton>
-                  </>
-                )}
+                <div className="header">
+                  <label className="label">{labelName}</label>
 
-                {isEditing && (
-                  <>
-                    <MemoEditor
+                  <div className="login-area">
+                    {isLoggedIn ? (
+                      <SubmitButton
+                        type="button"
+                        className="button loggin-btn"
+                        onClick={handleLogout}
+                        label="ログアウト"
+                      />
+                    ) : (
+                      <SubmitButton
+                        type="button"
+                        className="button loggin-btn"
+                        onClick={handleLogin}
+                        label="ログイン"
+                      />
+                    )}
+                  </div>
+                </div>
+
+                <div className="main-area">
+                  <div className="list-area">
+                    <MemoList
+                      memos={memos}
                       editingId={editingId}
-                      editingText={editingText}
-                      setEditingText={setEditingText}
-                      updateMemo={updateMemo}
-                      deleteMemo={deleteMemo}
-                    ></MemoEditor>
-                  </>
-                )}
+                      handleEditing={handleEditing}
+                    ></MemoList>
+
+                    <div className="create-button-area">
+                      {isLoggedIn && (
+                        <>
+                          <button className="primary-button" onClick={addMemo}>
+                            ＋
+                          </button>
+                        </>
+                      )}
+                    </div>
+                  </div>
+                  <div className="memo-area">
+                    {isEditing && (
+                      <MemoEditor
+                        editingId={editingId}
+                        editingText={editingText}
+                        setEditingText={setEditingText}
+                        updateMemo={updateMemo}
+                        deleteMemo={deleteMemo}
+                      />
+                    )}
+                  </div>
+                </div>
               </td>
             </LoginContext.Provider>
           </tr>

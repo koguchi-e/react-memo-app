@@ -20,10 +20,10 @@ export function MemoEditor({
         onChange={(e) => setEditingText(e.target.value)}
       ></TextAreaField>
       {isLoggedIn && (
-        <>
+        <div className="edit-button-area">
           <SubmitButton
             type="submit"
-            className="button"
+            className="button update-button"
             onClick={updateMemo}
             label="更新"
           ></SubmitButton>
@@ -33,7 +33,7 @@ export function MemoEditor({
             onClick={() => deleteMemo(editingId)}
             label="削除"
           ></SubmitButton>
-        </>
+        </div>
       )}
     </>
   );

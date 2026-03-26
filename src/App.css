@@ -14,14 +14,16 @@ body {
   text-align: left;
   margin-bottom: 2em;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
 }
 
 label {
   color: darkgray;
-  display: flex;
-  justify-content: flex-start;
-  margin-bottom: 0.5em;
+  margin-top: 1em;
+  margin-left: 1em;
   font-weight: bold;
+  font-size: 20px;
 }
 
 .textarea-form {
@@ -29,6 +31,8 @@ label {
   border: 2px solid #ddd;
   display: flex;
   justify-content: flex-start;
+  width: 200px;
+  height: 150px;
 }
 
 .button {
@@ -38,8 +42,7 @@ label {
   border-radius: 5px;
   border: 1px solid black;
   margin-top: 1em;
-  display: flex;
-  justify-content: flex-start;
+  margin-right: 0.5em;
 }
 
 .button:hover {
@@ -66,6 +69,45 @@ ul {
   list-style: none;
 }
 
-.loggin-btn {
+.header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.login-area {
+  align-items: right;
+}
+
+.main-area {
+  display: flex;
+  gap: 5em;
+  margin-top: 1em;
+}
+
+.list-area {
+  display: flex;
+  flex-direction: column;
+  align-items: left;
+  width: 300px;
+}
+
+.create-button-area {
+  margin-left: 2.5em;
   margin-bottom: 1em;
+}
+
+.memo-area {
+  display: flex;
+  flex-direction: column;
+  width: 250px;
+}
+
+.edit-button-area {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 1em;
+}
+
+.update-button {
+  flex-grow: 2;
 }
