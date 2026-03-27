@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
-import { MemoList } from "./components/MemoList";
-import { MemoEditor } from "./components/MemoEditor";
+import { Header } from "./components/layout/Header";
+import { MainArea } from "./components/layout/MainArea";
+import { LoginContext } from "./contexts/LoginContext";
 import "./App.css";
 
 function App() {
@@ -17,6 +18,7 @@ function App() {
   const [isEditing, setIsEditing] = useState(false);
   const [editingId, setEditingId] = useState(null);
   const [editingText, setEditingText] = useState("");
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
 
   const addMemo = () => {
     setMemos([
@@ -44,11 +46,15 @@ function App() {
     setIsEditing(false);
   };
 
-  let labelName;
+  let headerLabel;
   if (isEditing === true) {
-    labelName = "編集";
+    if (isLoggedIn === true) {
+      headerLabel = "編集";
+    } else {
+      headerLabel = "詳細";
+    }
   } else {
-    labelName = "一覧";
+    headerLabel = "一覧";
   }
 
   const deleteMemo = (id) => {
@@ -62,36 +68,28 @@ function App() {
 
   return (
     <>
-      <table className="container">
-        <tbody>
-          <tr>
-            <td>
-              <label className="label">{labelName}</label>
-              <MemoList
-                memos={memos}
-                editingId={editingId}
-                handleEditing={handleEditing}
-              ></MemoList>
-              <button className="button-reset" onClick={addMemo}>
-                ＋
-              </button>
-            </td>
-            <td>
-              {isEditing && (
-                <>
-                  <MemoEditor
-                    editingId={editingId}
-                    editingText={editingText}
-                    setEditingText={setEditingText}
-                    updateMemo={updateMemo}
-                    deleteMemo={deleteMemo}
-                  ></MemoEditor>
-                </>
-              )}
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+        <table className="container">
+          <tbody>
+            <tr>
+              <td>
+                <Header headerLabel={headerLabel}></Header>
+                <MainArea
+                  memos={memos}
+                  editingId={editingId}
+                  handleEditing={handleEditing}
+                  onClick={addMemo}
+                  isEditing={isEditing}
+                  editingText={editingText}
+                  setEditingText={setEditingText}
+                  updateMemo={updateMemo}
+                  deleteMemo={deleteMemo}
+                ></MainArea>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </LoginContext.Provider>
     </>
   );
 }
