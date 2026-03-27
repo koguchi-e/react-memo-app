@@ -1,8 +1,6 @@
-import { useContext } from "react";
-
 import { TextAreaField } from "../form/TextAreaField";
 import { SubmitButton } from "../form/SubmitButton";
-import { LoginContext } from "../../contexts/LoginContext";
+import { useLogin } from "../../hooks/useLogin";
 
 export function MemoEditor({
   editingId,
@@ -11,7 +9,7 @@ export function MemoEditor({
   updateMemo,
   deleteMemo,
 }) {
-  const { isLoggedIn } = useContext(LoginContext);
+  const { isLoggedIn } = useLogin();
   return (
     <>
       <TextAreaField

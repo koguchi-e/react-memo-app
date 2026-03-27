@@ -1,8 +1,6 @@
-import { useContext } from "react";
-
 import { MemoList } from "../memo/MemoList";
 import { MemoEditor } from "../memo/MemoEditor";
-import { LoginContext } from "../../contexts/LoginContext";
+import { useLogin } from "../../hooks/useLogin";
 
 export function MainArea({
   memos,
@@ -15,8 +13,7 @@ export function MainArea({
   updateMemo,
   deleteMemo,
 }) {
-  const { isLoggedIn } = useContext(LoginContext);
-
+  const { isLoggedIn } = useLogin();
   return (
     <div className="main-area">
       <div className="list-area">

@@ -1,9 +1,8 @@
-import { useContext } from "react";
 import { SubmitButton } from "../form/SubmitButton";
-import { LoginContext } from "../../contexts/LoginContext";
+import { useLogin } from "../../hooks/useLogin";
 
 export function Header({ labelName }) {
-  const { isLoggedIn, setIsLoggedIn } = useContext(LoginContext);
+  const { isLoggedIn, setIsLoggedIn } = useLogin();
   return (
     <div className="header">
       <label className="label">{labelName}</label>
