@@ -1,6 +1,6 @@
 import { TextAreaField } from "../form/TextAreaField";
 import { SubmitButton } from "../form/SubmitButton";
-import { useLogin } from "../../hooks/useLogin";
+import { useAuth } from "../../hooks/useAuth";
 
 export function MemoEditor({
   editingId,
@@ -9,7 +9,7 @@ export function MemoEditor({
   updateMemo,
   deleteMemo,
 }) {
-  const { isLoggedIn } = useLogin();
+  const { isLoggedIn } = useAuth();
   return (
     <>
       <TextAreaField

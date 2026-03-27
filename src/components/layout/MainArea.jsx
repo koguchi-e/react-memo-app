@@ -1,6 +1,6 @@
 import { MemoList } from "../memo/MemoList";
 import { MemoEditor } from "../memo/MemoEditor";
-import { useLogin } from "../../hooks/useLogin";
+import { useAuth } from "../../hooks/useAuth";
 
 export function MainArea({
   memos,
@@ -13,7 +13,7 @@ export function MainArea({
   updateMemo,
   deleteMemo,
 }) {
-  const { isLoggedIn } = useLogin();
+  const { isLoggedIn } = useAuth();
   return (
     <div className="main-area">
       <div className="list-area">

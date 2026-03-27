@@ -1,11 +1,11 @@
 import { SubmitButton } from "../form/SubmitButton";
-import { useLogin } from "../../hooks/useLogin";
+import { useAuth } from "../../hooks/useAuth";
 
-export function Header({ labelName }) {
-  const { isLoggedIn, setIsLoggedIn } = useLogin();
+export function Header({ headerLabel }) {
+  const { isLoggedIn, setIsLoggedIn } = useAuth();
   return (
     <div className="header">
-      <label className="label">{labelName}</label>
+      <label className="label">{headerLabel}</label>
 
       <div className="login-area">
         {isLoggedIn ? (

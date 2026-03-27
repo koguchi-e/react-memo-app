@@ -46,15 +46,15 @@ function App() {
     setIsEditing(false);
   };
 
-  let labelName;
+  let headerLabel;
   if (isEditing === true) {
     if (isLoggedIn === true) {
-      labelName = "編集";
+      headerLabel = "編集";
     } else {
-      labelName = "詳細";
+      headerLabel = "詳細";
     }
   } else {
-    labelName = "一覧";
+    headerLabel = "一覧";
   }
 
   const deleteMemo = (id) => {
@@ -73,7 +73,7 @@ function App() {
           <tbody>
             <tr>
               <td>
-                <Header labelName={labelName}></Header>
+                <Header headerLabel={headerLabel}></Header>
                 <MainArea
                   memos={memos}
                   editingId={editingId}
