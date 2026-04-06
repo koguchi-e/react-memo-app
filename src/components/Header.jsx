@@ -1,11 +1,13 @@
-import { SubmitButton } from "../form/SubmitButton";
-import { useAuth } from "../../hooks/useAuth";
+import { SubmitButton } from "./form/SubmitButton";
+import { useAuth } from "../hooks/useAuth";
 
-export function Header({ headerLabel }) {
+export function Header({ isEditing }) {
   const { isLoggedIn, setIsLoggedIn } = useAuth();
   return (
     <div className="header">
-      <label className="label">{headerLabel}</label>
+      <label className="label">
+        {isEditing ? (isLoggedIn ? "編集" : "詳細") : "一覧"}
+      </label>
 
       <div className="login-area">
         {isLoggedIn ? (
