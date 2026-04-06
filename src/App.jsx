@@ -4,15 +4,14 @@ import "./App.css";
 
 import { Header } from "./components/Header";
 import { MemoContent } from "./components/memo/MemoContent";
-import { LoginContext } from "./contexts/LoginContext";
+import { LoginProvider } from "./components/LoginProvider";
 
 function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   return (
     <>
-      <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
+      <LoginProvider>
         <div className="container">
           <Header isEditing={isEditing}></Header>
           <MemoContent
@@ -20,7 +19,7 @@ function App() {
             setIsEditing={setIsEditing}
           ></MemoContent>
         </div>
-      </LoginContext.Provider>
+      </LoginProvider>
     </>
   );
 }
