@@ -65,7 +65,7 @@ export function MemoContent({ isEditing, setIsEditing }) {
         <div className="create-button-area">
           {isLoggedIn && (
             <>
-              <button className="primary-button" onClick={onClick}>
+              <button className="primary-button" onClick={addMemo}>
                 ＋
               </button>
             </>
