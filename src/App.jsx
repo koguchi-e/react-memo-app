@@ -13,19 +13,13 @@ function App() {
   return (
     <>
       <LoginContext.Provider value={{ isLoggedIn, setIsLoggedIn }}>
-        <table className="container">
-          <tbody>
-            <tr>
-              <td>
-                <Header isEditing={isEditing}></Header>
-                <MemoContent
-                  isEditing={isEditing}
-                  setIsEditing={setIsEditing}
-                ></MemoContent>
-              </td>
-            </tr>
-          </tbody>
-        </table>
+        <div className="container">
+          <Header isEditing={isEditing}></Header>
+          <MemoContent
+            isEditing={isEditing}
+            setIsEditing={setIsEditing}
+          ></MemoContent>
+        </div>
       </LoginContext.Provider>
     </>
   );
