@@ -14,7 +14,7 @@ export function Header({ isEditing }) {
           type="button"
           className="button"
           onClick={() => setIsLoggedIn(!isLoggedIn)}
-          label={isLoggedIn ? "ログアウト" : "ログイン"}
+          children={isLoggedIn ? "ログアウト" : "ログイン"}
         />
       </div>
     </header>

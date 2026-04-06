@@ -23,13 +23,13 @@ export function MemoEditor({
             type="submit"
             className="button update-button"
             onClick={updateMemo}
-            label="更新"
+            children="更新"
           ></SubmitButton>
           <SubmitButton
             type="button"
             className="button delete-button"
             onClick={() => deleteMemo(editingId)}
-            label="削除"
+            children="削除"
           ></SubmitButton>
         </div>
       )}
