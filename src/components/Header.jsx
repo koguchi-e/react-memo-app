@@ -10,21 +10,12 @@ export function Header({ isEditing }) {
       </label>
 
       <div className="login-area">
-        {isLoggedIn ? (
-          <SubmitButton
-            type="button"
-            className="button loggin-btn"
-            onClick={() => setIsLoggedIn(false)}
-            label="ログアウト"
-          />
-        ) : (
-          <SubmitButton
-            type="button"
-            className="button loggin-btn"
-            onClick={() => setIsLoggedIn(true)}
-            label="ログイン"
-          />
-        )}
+        <SubmitButton
+          type="button"
+          className="button"
+          onClick={() => setIsLoggedIn(!isLoggedIn)}
+          label={isLoggedIn ? "ログアウト" : "ログイン"}
+        />
       </div>
     </header>
   );
