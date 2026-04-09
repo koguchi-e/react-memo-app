@@ -60,7 +60,7 @@ export function MemoContent({ isEditing, setIsEditing }) {
           memos={memos}
           editingId={editingId}
           handleEditing={handleEditing}
-        ></MemoList>
+        />
 
         <div className="create-button-area">
           {isLoggedIn && (
