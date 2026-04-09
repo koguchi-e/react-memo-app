@@ -20,14 +20,16 @@ export function MemoContent({ isEditing, setIsEditing }) {
   const { isLoggedIn } = useAuth();
 
   const addMemo = () => {
-    setMemos([
+    const newMemos = [
       ...memos,
       {
         id: Math.random(),
         text: "新規メモ",
         editing: false,
       },
-    ]);
+    ];
+    setMemos(newMemos);
+    localStorage.setItem("memos", JSON.stringify(newMemos));
   };
 
   const handleEditing = (memo) => {
@@ -37,22 +39,21 @@ export function MemoContent({ isEditing, setIsEditing }) {
   };
 
   const updateMemo = () => {
-    setMemos(
-      memos.map((memo) =>
-        memo.id === editingId ? { ...memo, text: editingText } : memo,
-      ),
+    const newMemos = memos.map((memo) =>
+      memo.id === editingId ? { ...memo, text: editingText } : memo,
     );
+    setMemos(newMemos);
+    localStorage.setItem("memos", JSON.stringify(newMemos));
     setIsEditing(false);
   };
 
   const deleteMemo = (id) => {
-    setMemos(memos.filter((memo) => memo.id !== id));
+    const newMemos = memos.filter((memo) => memo.id !== id);
+    setMemos(newMemos);
+    localStorage.setItem("memos", JSON.stringify(newMemos));
     setIsEditing(false);
   };
 
-  useEffect(() => {
-    localStorage.setItem("memos", JSON.stringify(memos));
-  }, [memos]);
   return (
     <div className="main-area">
       <div className="list-area">
