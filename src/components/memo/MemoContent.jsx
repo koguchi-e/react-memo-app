@@ -19,6 +19,10 @@ export function MemoContent({ isEditing, setIsEditing }) {
   const [editingText, setEditingText] = useState("");
   const { isLoggedIn } = useAuth();
 
+  const saveMemos = (newMemos) => {
+    localStorage.setItem("memos", JSON.stringify(newMemos));
+  };
+
   const addMemo = () => {
     const newMemos = [
       ...memos,
@@ -29,7 +33,7 @@ export function MemoContent({ isEditing, setIsEditing }) {
       },
     ];
     setMemos(newMemos);
-    localStorage.setItem("memos", JSON.stringify(newMemos));
+    saveMemos(newMemos);
   };
 
   const handleEditing = (memo) => {
@@ -43,14 +47,14 @@ export function MemoContent({ isEditing, setIsEditing }) {
       memo.id === editingId ? { ...memo, text: editingText } : memo,
     );
     setMemos(newMemos);
-    localStorage.setItem("memos", JSON.stringify(newMemos));
+    saveMemos(newMemos);
     setIsEditing(false);
   };
 
   const deleteMemo = (id) => {
     const newMemos = memos.filter((memo) => memo.id !== id);
     setMemos(newMemos);
-    localStorage.setItem("memos", JSON.stringify(newMemos));
+    saveMemos(newMemos);
     setIsEditing(false);
   };
 
