@@ -1,7 +1,12 @@
-export function SubmitButton({ type, onClick, label }) {
+export function SubmitButton({ type, className, onClick, disabled, children }) {
   return (
-    <button type={type} className="button" onClick={onClick}>
-      {label}
+    <button
+      type={type}
+      className={className}
+      onClick={onClick}
+      disabled={disabled}
+    >
+      {children}
     </button>
   );
 }

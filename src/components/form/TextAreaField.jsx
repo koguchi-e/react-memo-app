@@ -1,4 +1,4 @@
-export function TextAreaField({ id, value, onChange }) {
+export function TextAreaField({ id, value, onChange, disabled }) {
   return (
     <textarea
       id={id}
@@ -6,6 +6,7 @@ export function TextAreaField({ id, value, onChange }) {
       onChange={onChange}
       rows={5}
       className="textarea-form"
+      disabled={disabled}
     ></textarea>
   );
 }
